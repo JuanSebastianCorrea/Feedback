@@ -1,0 +1,37 @@
+{% extends 'base.html'  %}
+{% block title %} Feedback-User {% endblock %}
+
+{% block content %}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title d-inline">{{session["username"]}}</h5><a href="#" class="btn btn-danger btn-sm mb-1 mx-2"><i class="fas fa-trash"></i></a>
+      <h6 class="card-subtitle my-2">{{user.first_name}} {{user.last_name}}</h6>
+      <p class="card-text">{{user.email}}</p>
+      <a href="/users/{{user.username}}/feedback/add" class="btn btn-primary btn-sm">Add Feedback</a>
+    </div>
+  </div>
+
+<div class="container mt-4">
+<h1 class="text-center">Feedback</h1>
+<div class="container">
+    <div class="row">
+
+        {% for f in user.feedback %}
+        <div class="col-4 my-3">
+          <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{f.title}}</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{f.content}}</p>
+              <a href="/feedback/{{f.id}}/update" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></a>
+              <a href="/feedback/{{f.id}}/delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>      
+</div>    
+</div>
+{% endblock %}
